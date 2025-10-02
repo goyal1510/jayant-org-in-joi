@@ -27,8 +27,8 @@ export function SignupForm({
       toast.success("Account created successfully!", {
         description: "Please check your email to verify your account."
       })
-      // Force page refresh to update server-side auth state
-      window.location.href = '/new'
+      // Redirect to home after successful signup
+      router.push('/new')
     } catch (error: any) {
       console.error('Email sign up error:', error)
       toast.error("Sign up failed", {
