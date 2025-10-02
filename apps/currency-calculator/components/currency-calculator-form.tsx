@@ -170,8 +170,8 @@ export function CurrencyCalculatorForm() {
           <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             {/* Denominations Table */}
             <div className="space-y-2 sm:space-y-3">
-              <div className="bg-gray-50 dark:bg-gray-800 p-2 sm:p-3 rounded-lg">
-                <h3 className="text-base sm:text-base font-semibold mb-2 sm:mb-3 text-center text-gray-700 dark:text-gray-300">Denomination Details</h3>
+              <div className="bg-muted p-2 sm:p-3 rounded-lg">
+                <h3 className="text-base sm:text-base font-semibold mb-2 sm:mb-3 text-center text-muted-foreground">Denomination Details</h3>
                 
                 {/* Mobile-Optimized Table */}
                 <div 
@@ -189,9 +189,9 @@ export function CurrencyCalculatorForm() {
                     }
                   `}</style>
                   <table className="w-full" style={{minWidth: '500px'}}>
-                    <thead className="sticky top-0 bg-gray-50 dark:bg-gray-800 z-10">
-                      <tr className="border-b border-gray-200 dark:border-gray-700">
-                        <th className="text-left py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-32">Denomination</th>
+                    <thead className="sticky top-0 bg-muted z-10">
+                      <tr className="border-b border-border">
+                        <th className="sticky left-0 bg-muted z-20 text-left py-2 px-3 text-sm font-semibold text-muted-foreground w-32 border-r border-border">Denomination</th>
                         <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Bundle</th>
                         <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Open</th>
                         <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Count</th>
@@ -200,10 +200,10 @@ export function CurrencyCalculatorForm() {
                     </thead>
                       <tbody>
                         {denominations.map((denom, index) => (
-                          <tr key={denom.denomination} className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+                          <tr key={denom.denomination} className="border-b border-border hover:bg-muted transition-colors">
                             {/* Denomination */}
-                            <td className="py-1 px-3 w-32">
-                              <div className="text-base font-semibold text-gray-900 dark:text-white">
+                            <td className="sticky left-0 bg-muted z-10 py-1 px-3 w-32 border-r border-border">
+                              <div className="text-base font-semibold text-foreground">
                                 ₹{denom.denomination}
                               </div>
                             </td>
@@ -232,14 +232,14 @@ export function CurrencyCalculatorForm() {
                             
                             {/* Count Display */}
                             <td className="py-1 px-3 text-center w-20">
-                              <div className={`text-base font-medium ${denom.count >= 0 ? 'text-gray-900 dark:text-white' : 'text-red-600 dark:text-red-400'}`}>
+                              <div className={`text-base font-medium ${denom.count >= 0 ? 'text-foreground' : 'text-destructive'}`}>
                                 {denom.count}
                               </div>
                             </td>
                             
                             {/* Total */}
                             <td className="py-1 px-3 text-center w-24">
-                              <div className={`text-base font-semibold ${denom.total >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                              <div className={`text-base font-semibold ${denom.total >= 0 ? 'text-green-600' : 'text-destructive'}`}>
                                 ₹{denom.total.toLocaleString()}
                               </div>
                             </td>
@@ -252,9 +252,8 @@ export function CurrencyCalculatorForm() {
             </div>
 
             {/* Note and Grand Total */}
-            <div className="flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-6 p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+            <div className="flex flex-col sm:flex-row sm:items-end gap-4 sm:gap-6 p-4 sm:p-6 bg-muted rounded-lg">
               <div className="flex-1">
-                <Label htmlFor="note" className="text-base sm:text-sm font-medium text-gray-700 dark:text-gray-300">Note (Optional)</Label>
                 <Input
                   id="note"
                   placeholder="Add a note for this calculation..."
@@ -264,7 +263,6 @@ export function CurrencyCalculatorForm() {
                 />
               </div>
               <div className="text-center sm:text-right">
-                <p className="text-base sm:text-sm text-gray-600 dark:text-gray-400 font-medium mb-2">Grand Total</p>
                 <p className={`text-xl sm:text-base font-bold ${getTotalAmount() >= 0 ? 'text-green-600' : 'text-red-600'} h-12 sm:h-8 flex items-center justify-center sm:justify-end`}>
                   ₹{getTotalAmount().toLocaleString()}
                 </p>

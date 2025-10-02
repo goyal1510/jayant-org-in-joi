@@ -332,9 +332,9 @@ export function CalculationsHistory() {
         <CardContent className="p-2 sm:p-6">
           <div className="space-y-3 sm:space-y-4">
             {/* Date Picker Navigation */}
-            <div className="bg-gray-50 dark:bg-gray-800 p-1 sm:p-3 rounded-lg">
+            <div className="bg-muted p-1 sm:p-3 rounded-lg flex justify-center items-center">
               {/* Navigation Buttons */}
-              <div className="flex items-center justify-center gap-2 sm:gap-4 mb-3">
+              <div className="flex items-center justify-center gap-2 sm:gap-4">
                 <Button
                   variant="outline"
                   size="sm"
@@ -392,7 +392,7 @@ export function CalculationsHistory() {
 
             {/* Current Entry Display */}
             {!currentEntry ? (
-              <div className="text-center py-6 sm:py-8 text-gray-500">
+              <div className="text-center py-6 sm:py-8 text-muted-foreground">
                 <History className="h-10 w-10 sm:h-12 sm:w-12 mx-auto mb-3 sm:mb-4 opacity-50" />
                 <p className="text-sm sm:text-base">No calculations found.</p>
               </div>
@@ -405,7 +405,7 @@ export function CalculationsHistory() {
                       <div className="flex-1">
                         {currentEntry.note && (
                           <div>
-                            <Label className="text-sm sm:text-sm font-medium text-gray-700 dark:text-gray-300">Note</Label>
+                            <Label className="text-sm sm:text-sm font-medium text-muted-foreground">Note</Label>
                             <Input
                               value={currentEntry.note}
                               readOnly
@@ -415,16 +415,15 @@ export function CalculationsHistory() {
                         )}
                       </div>
                       <div className="text-center sm:text-right">
-                        <p className="text-sm sm:text-sm text-gray-600 dark:text-gray-400 font-medium mb-1">Grand Total</p>
-                        <p className={`text-base sm:text-base font-bold ${getTotalAmount(currentEntry.denominations) >= 0 ? 'text-green-600' : 'text-red-600'} h-10 sm:h-8 flex items-center justify-center sm:justify-end`}>
+                        <p className={`text-base sm:text-base font-bold ${getTotalAmount(currentEntry.denominations) >= 0 ? 'text-green-600' : 'text-destructive'} h-10 sm:h-8 flex items-center justify-center sm:justify-end`}>
                           ₹{getTotalAmount(currentEntry.denominations).toLocaleString()}
                         </p>
                       </div>
                     </div>
 
                     {/* Denominations Table */}
-                    <div className="bg-gray-50 dark:bg-gray-800 p-1 sm:p-3 rounded-lg">
-                      <h4 className="text-sm sm:text-sm font-semibold mb-1 sm:mb-3 text-center text-gray-700 dark:text-gray-300">Denomination Details</h4>
+                    <div className="bg-muted p-1 sm:p-3 rounded-lg">
+                      <h4 className="text-sm sm:text-sm font-semibold mb-1 sm:mb-3 text-center text-muted-foreground">Denomination Details</h4>
                       <div 
                         className="overflow-x-auto" 
                         style={{
@@ -440,42 +439,42 @@ export function CalculationsHistory() {
                           }
                         `}</style>
                         <table className="w-full" style={{minWidth: '500px'}}>
-                          <thead className="sticky top-0 bg-gray-50 dark:bg-gray-800 z-10">
-                            <tr className="border-b border-gray-200 dark:border-gray-700">
-                              <th className="text-left py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-32">Denomination</th>
-                              <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Bundle</th>
-                              <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Open</th>
-                              <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Count</th>
-                              <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-24">Total</th>
+                          <thead className="sticky top-0 bg-muted z-10">
+                            <tr className="border-b border-border">
+                              <th className="sticky left-0 bg-muted z-20 text-left py-2 px-3 text-sm font-semibold text-muted-foreground w-32 border-r border-border">Denomination</th>
+                              <th className="text-center py-2 px-3 text-sm font-semibold text-muted-foreground w-20">Bundle</th>
+                              <th className="text-center py-2 px-3 text-sm font-semibold text-muted-foreground w-20">Open</th>
+                              <th className="text-center py-2 px-3 text-sm font-semibold text-muted-foreground w-20">Count</th>
+                              <th className="text-center py-2 px-3 text-sm font-semibold text-muted-foreground w-24">Total</th>
                             </tr>
                           </thead>
                             <tbody>
                               {currentEntry.denominations
                                 .sort((a: any, b: any) => b.denomination - a.denomination)
                                 .map((denom: any) => (
-                                  <tr key={denom.id} className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-                                    <td className="py-2 px-3 w-32">
-                                      <div className="text-base font-semibold text-gray-900 dark:text-white">
+                                  <tr key={denom.id} className="border-b border-border hover:bg-muted transition-colors">
+                                    <td className="sticky left-0 bg-muted z-10 py-2 px-3 w-32 border-r border-border">
+                                      <div className="text-base font-semibold text-foreground">
                                         ₹{denom.denomination}
                                       </div>
                                     </td>
                                     <td className="py-2 px-3 text-center w-20">
-                                      <div className="text-base font-medium text-gray-900 dark:text-white">
+                                      <div className="text-base font-medium text-foreground">
                                         {denom.bundle_count || 0}
                                       </div>
                                     </td>
                                     <td className="py-2 px-3 text-center w-20">
-                                      <div className="text-base font-medium text-gray-900 dark:text-white">
+                                      <div className="text-base font-medium text-foreground">
                                         {denom.open_count || 0}
                                       </div>
                                     </td>
                                     <td className="py-2 px-3 text-center w-20">
-                                      <div className={`text-base font-medium ${denom.count >= 0 ? 'text-gray-900 dark:text-white' : 'text-red-600 dark:text-red-400'}`}>
+                                      <div className={`text-base font-medium ${denom.count >= 0 ? 'text-foreground' : 'text-destructive'}`}>
                                         {denom.count}
                                       </div>
                                     </td>
                                     <td className="py-2 px-3 text-center w-24">
-                                      <div className={`text-base font-semibold ${denom.total && denom.total >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                      <div className={`text-base font-semibold ${denom.total && denom.total >= 0 ? 'text-green-600' : 'text-destructive'}`}>
                                         ₹{(denom.denomination * denom.count).toLocaleString()}
                                       </div>
                                     </td>
