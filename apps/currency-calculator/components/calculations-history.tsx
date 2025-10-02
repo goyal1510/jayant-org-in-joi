@@ -340,7 +340,7 @@ export function CalculationsHistory() {
                   size="sm"
                   onClick={() => navigateEntry('prev')}
                   disabled={currentEntryIndex === availableEntries.length - 1}
-                  className="flex items-center justify-center h-8 sm:h-9 w-8 sm:w-9 min-h-[32px] touch-manipulation"
+                  className="flex items-center justify-center h-10 sm:h-9 w-10 sm:w-9 min-h-[40px] touch-manipulation"
                 >
                   <ChevronLeft className="h-4 w-4" />
                 </Button>
@@ -349,7 +349,7 @@ export function CalculationsHistory() {
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
-                      className="flex items-center gap-2 min-w-[160px] sm:min-w-[200px] justify-start text-xs sm:text-sm h-8 sm:h-9 px-3 min-h-[32px] touch-manipulation"
+                      className="flex items-center gap-2 min-w-[160px] sm:min-w-[200px] justify-start text-sm sm:text-sm h-10 sm:h-9 px-3 min-h-[40px] touch-manipulation"
                     >
                       <Calendar className="h-4 w-4" />
                       <span className="font-medium truncate">
@@ -383,7 +383,7 @@ export function CalculationsHistory() {
                   size="sm"
                   onClick={() => navigateEntry('next')}
                   disabled={currentEntryIndex === 0}
-                  className="flex items-center justify-center h-8 sm:h-9 w-8 sm:w-9 min-h-[32px] touch-manipulation"
+                  className="flex items-center justify-center h-10 sm:h-9 w-10 sm:w-9 min-h-[40px] touch-manipulation"
                 >
                   <ChevronRight className="h-4 w-4" />
                 </Button>
@@ -405,18 +405,18 @@ export function CalculationsHistory() {
                       <div className="flex-1">
                         {currentEntry.note && (
                           <div>
-                            <Label className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">Note</Label>
+                            <Label className="text-sm sm:text-sm font-medium text-gray-700 dark:text-gray-300">Note</Label>
                             <Input
                               value={currentEntry.note}
                               readOnly
-                              className="mt-1 text-xs sm:text-sm h-7 sm:h-8 min-h-[32px]"
+                              className="mt-1 text-base sm:text-sm h-10 sm:h-8 min-h-[40px]"
                             />
                           </div>
                         )}
                       </div>
                       <div className="text-center sm:text-right">
-                        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium mb-1">Grand Total</p>
-                        <p className={`text-sm sm:text-base font-bold ${getTotalAmount(currentEntry.denominations) >= 0 ? 'text-green-600' : 'text-red-600'} h-7 sm:h-8 flex items-center justify-center sm:justify-end`}>
+                        <p className="text-sm sm:text-sm text-gray-600 dark:text-gray-400 font-medium mb-1">Grand Total</p>
+                        <p className={`text-base sm:text-base font-bold ${getTotalAmount(currentEntry.denominations) >= 0 ? 'text-green-600' : 'text-red-600'} h-10 sm:h-8 flex items-center justify-center sm:justify-end`}>
                           ₹{getTotalAmount(currentEntry.denominations).toLocaleString()}
                         </p>
                       </div>
@@ -424,7 +424,7 @@ export function CalculationsHistory() {
 
                     {/* Denominations Table */}
                     <div className="bg-gray-50 dark:bg-gray-800 p-1 sm:p-3 rounded-lg">
-                      <h4 className="text-xs sm:text-sm font-semibold mb-1 sm:mb-3 text-center text-gray-700 dark:text-gray-300">Denomination Details</h4>
+                      <h4 className="text-sm sm:text-sm font-semibold mb-1 sm:mb-3 text-center text-gray-700 dark:text-gray-300">Denomination Details</h4>
                       <div 
                         className="overflow-x-auto" 
                         style={{
@@ -442,11 +442,11 @@ export function CalculationsHistory() {
                         <table className="w-full" style={{minWidth: '500px'}}>
                           <thead className="sticky top-0 bg-gray-50 dark:bg-gray-800 z-10">
                             <tr className="border-b border-gray-200 dark:border-gray-700">
-                              <th className="text-left py-2 px-3 text-xs font-semibold text-gray-600 dark:text-gray-400 w-32">Denomination</th>
-                              <th className="text-center py-2 px-3 text-xs font-semibold text-gray-600 dark:text-gray-400 w-20">Bundle</th>
-                              <th className="text-center py-2 px-3 text-xs font-semibold text-gray-600 dark:text-gray-400 w-20">Open</th>
-                              <th className="text-center py-2 px-3 text-xs font-semibold text-gray-600 dark:text-gray-400 w-20">Count</th>
-                              <th className="text-center py-2 px-3 text-xs font-semibold text-gray-600 dark:text-gray-400 w-24">Total</th>
+                              <th className="text-left py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-32">Denomination</th>
+                              <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Bundle</th>
+                              <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Open</th>
+                              <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Count</th>
+                              <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-24">Total</th>
                             </tr>
                           </thead>
                             <tbody>
@@ -455,27 +455,27 @@ export function CalculationsHistory() {
                                 .map((denom: any) => (
                                   <tr key={denom.id} className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                                     <td className="py-2 px-3 w-32">
-                                      <div className="text-sm font-semibold text-gray-900 dark:text-white">
+                                      <div className="text-base font-semibold text-gray-900 dark:text-white">
                                         ₹{denom.denomination}
                                       </div>
                                     </td>
                                     <td className="py-2 px-3 text-center w-20">
-                                      <div className="text-sm font-medium text-gray-900 dark:text-white">
+                                      <div className="text-base font-medium text-gray-900 dark:text-white">
                                         {denom.bundle_count || 0}
                                       </div>
                                     </td>
                                     <td className="py-2 px-3 text-center w-20">
-                                      <div className="text-sm font-medium text-gray-900 dark:text-white">
+                                      <div className="text-base font-medium text-gray-900 dark:text-white">
                                         {denom.open_count || 0}
                                       </div>
                                     </td>
                                     <td className="py-2 px-3 text-center w-20">
-                                      <div className={`text-sm font-medium ${denom.count >= 0 ? 'text-gray-900 dark:text-white' : 'text-red-600 dark:text-red-400'}`}>
+                                      <div className={`text-base font-medium ${denom.count >= 0 ? 'text-gray-900 dark:text-white' : 'text-red-600 dark:text-red-400'}`}>
                                         {denom.count}
                                       </div>
                                     </td>
                                     <td className="py-2 px-3 text-center w-24">
-                                      <div className={`text-sm font-semibold ${denom.total && denom.total >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                      <div className={`text-base font-semibold ${denom.total && denom.total >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                                         ₹{(denom.denomination * denom.count).toLocaleString()}
                                       </div>
                                     </td>
@@ -493,7 +493,7 @@ export function CalculationsHistory() {
                         size="sm"
                         onClick={() => handleDelete(currentEntry.id)}
                         disabled={deletingId === currentEntry.id}
-                        className="flex items-center gap-1 text-xs sm:text-sm h-8 sm:h-9 px-3 sm:px-4 min-h-[32px] touch-manipulation"
+                        className="flex items-center gap-1 text-sm sm:text-sm h-10 sm:h-9 px-3 sm:px-4 min-h-[40px] touch-manipulation"
                       >
                         <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
                         Delete

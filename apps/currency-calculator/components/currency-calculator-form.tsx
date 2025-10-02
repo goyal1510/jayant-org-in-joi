@@ -171,7 +171,7 @@ export function CurrencyCalculatorForm() {
             {/* Denominations Table */}
             <div className="space-y-2 sm:space-y-3">
               <div className="bg-gray-50 dark:bg-gray-800 p-2 sm:p-3 rounded-lg">
-                <h3 className="text-sm sm:text-base font-semibold mb-2 sm:mb-3 text-center text-gray-700 dark:text-gray-300">Denomination Details</h3>
+                <h3 className="text-base sm:text-base font-semibold mb-2 sm:mb-3 text-center text-gray-700 dark:text-gray-300">Denomination Details</h3>
                 
                 {/* Mobile-Optimized Table */}
                 <div 
@@ -191,11 +191,11 @@ export function CurrencyCalculatorForm() {
                   <table className="w-full" style={{minWidth: '500px'}}>
                     <thead className="sticky top-0 bg-gray-50 dark:bg-gray-800 z-10">
                       <tr className="border-b border-gray-200 dark:border-gray-700">
-                        <th className="text-left py-2 px-3 text-xs font-semibold text-gray-600 dark:text-gray-400 w-32">Denomination</th>
-                        <th className="text-center py-2 px-3 text-xs font-semibold text-gray-600 dark:text-gray-400 w-20">Bundle</th>
-                        <th className="text-center py-2 px-3 text-xs font-semibold text-gray-600 dark:text-gray-400 w-20">Open</th>
-                        <th className="text-center py-2 px-3 text-xs font-semibold text-gray-600 dark:text-gray-400 w-20">Count</th>
-                        <th className="text-center py-2 px-3 text-xs font-semibold text-gray-600 dark:text-gray-400 w-24">Total</th>
+                        <th className="text-left py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-32">Denomination</th>
+                        <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Bundle</th>
+                        <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Open</th>
+                        <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Count</th>
+                        <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-24">Total</th>
                       </tr>
                     </thead>
                       <tbody>
@@ -203,7 +203,7 @@ export function CurrencyCalculatorForm() {
                           <tr key={denom.denomination} className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
                             {/* Denomination */}
                             <td className="py-2 px-3 w-32">
-                              <div className="text-sm font-semibold text-gray-900 dark:text-white">
+                              <div className="text-base font-semibold text-gray-900 dark:text-white">
                                 ₹{denom.denomination}
                               </div>
                             </td>
@@ -215,7 +215,7 @@ export function CurrencyCalculatorForm() {
                                 value={denom.bundle_count || ''}
                                 onChange={(e) => updateDenomination(index, 'bundle_count', e.target.value)}
                                 placeholder="0"
-                                className="text-sm text-center h-8 w-full min-h-[32px] touch-manipulation"
+                                className="text-base text-center h-10 w-full min-h-[40px] touch-manipulation"
                               />
                             </td>
                             
@@ -226,20 +226,20 @@ export function CurrencyCalculatorForm() {
                                 value={denom.open_count || ''}
                                 onChange={(e) => updateDenomination(index, 'open_count', e.target.value)}
                                 placeholder="0"
-                                className="text-sm text-center h-8 w-full min-h-[32px] touch-manipulation"
+                                className="text-base text-center h-10 w-full min-h-[40px] touch-manipulation"
                               />
                             </td>
                             
                             {/* Count Display */}
                             <td className="py-2 px-3 text-center w-20">
-                              <div className={`text-sm font-medium ${denom.count >= 0 ? 'text-gray-900 dark:text-white' : 'text-red-600 dark:text-red-400'}`}>
+                              <div className={`text-base font-medium ${denom.count >= 0 ? 'text-gray-900 dark:text-white' : 'text-red-600 dark:text-red-400'}`}>
                                 {denom.count}
                               </div>
                             </td>
                             
                             {/* Total */}
                             <td className="py-2 px-3 text-center w-24">
-                              <div className={`text-sm font-semibold ${denom.total >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                              <div className={`text-base font-semibold ${denom.total >= 0 ? 'text-green-600' : 'text-red-600'}`}>
                                 ₹{denom.total.toLocaleString()}
                               </div>
                             </td>
@@ -254,18 +254,18 @@ export function CurrencyCalculatorForm() {
             {/* Note and Grand Total */}
             <div className="flex flex-col sm:flex-row sm:items-end gap-2 sm:gap-4 p-2 sm:p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
               <div className="flex-1">
-                <Label htmlFor="note" className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">Note (Optional)</Label>
+                <Label htmlFor="note" className="text-sm sm:text-sm font-medium text-gray-700 dark:text-gray-300">Note (Optional)</Label>
                 <Input
                   id="note"
                   placeholder="Add a note for this calculation..."
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
-                  className="mt-1 text-xs sm:text-sm h-7 sm:h-8 min-h-[32px] touch-manipulation"
+                  className="mt-1 text-base sm:text-sm h-10 sm:h-8 min-h-[40px] touch-manipulation"
                 />
               </div>
               <div className="text-center sm:text-right">
-                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium mb-1">Grand Total</p>
-                <p className={`text-sm sm:text-base font-bold ${getTotalAmount() >= 0 ? 'text-green-600' : 'text-red-600'} h-7 sm:h-8 flex items-center justify-center sm:justify-end`}>
+                <p className="text-sm sm:text-sm text-gray-600 dark:text-gray-400 font-medium mb-1">Grand Total</p>
+                <p className={`text-base sm:text-base font-bold ${getTotalAmount() >= 0 ? 'text-green-600' : 'text-red-600'} h-10 sm:h-8 flex items-center justify-center sm:justify-end`}>
                   ₹{getTotalAmount().toLocaleString()}
                 </p>
               </div>
@@ -276,7 +276,7 @@ export function CurrencyCalculatorForm() {
               <Button
                 type="submit"
                 disabled={getTotalAmount() === 0 || isSubmitting}
-                className="w-full sm:w-auto px-6 py-3 sm:py-2 h-12 sm:h-10 text-sm sm:text-base font-medium min-h-[48px] touch-manipulation"
+                className="w-full sm:w-auto px-6 py-3 sm:py-2 h-14 sm:h-10 text-base sm:text-base font-medium min-h-[56px] touch-manipulation"
               >
                 <Save className="h-4 w-4 mr-2" />
                 {isSubmitting ? 'Saving...' : 'Save Calculation'}

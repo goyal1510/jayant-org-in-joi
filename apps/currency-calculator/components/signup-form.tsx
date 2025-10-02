@@ -47,8 +47,8 @@ export function SignupForm({
           <form className="p-6 md:p-8" onSubmit={handleEmailSignUp}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
-                <h1 className="text-2xl font-bold">Create your account</h1>
-                <p className="text-muted-foreground text-balance">
+                <h1 className="text-3xl sm:text-2xl font-bold">Create your account</h1>
+                <p className="text-muted-foreground text-balance text-base sm:text-sm">
                   Sign up for your JOI account
                 </p>
               </div>
