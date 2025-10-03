@@ -12,9 +12,7 @@ import { useRouter } from 'next/navigation'
 
 interface DenominationInput {
   denomination: number
-  bundle_count: string | number
-  open_count: string | number
-  count: number
+  count: string | number
   total: number
 }
 
@@ -27,32 +25,24 @@ export function CurrencyCalculatorForm() {
   const [denominations, setDenominations] = useState<DenominationInput[]>(
     CURRENCY_DENOMINATIONS.map((currency: { value: number; label: string }) => ({
       denomination: currency.value,
-      bundle_count: '',
-      open_count: '',
-      count: 0,
+      count: '',
       total: 0
     }))
   )
 
-  const updateDenomination = (index: number, field: 'bundle_count' | 'open_count', value: string) => {
+  const updateDenomination = (index: number, value: string) => {
     const updated = [...denominations]
     const currentDenom = updated[index]
     if (currentDenom) {
       // Store the raw string value for display
-      updated[index] = { ...currentDenom, [field]: value as any }
+      updated[index] = { ...currentDenom, count: value }
       
       // Parse the value for calculations
       const numericValue = value === '' || value === '-' ? '0' : value
       const parsedValue = parseInt(numericValue) || 0
       
-      // Auto-calculate count: (bundle_count × 100) + open_count
-      const bundleCount = field === 'bundle_count' ? parsedValue : (typeof currentDenom.bundle_count === 'string' ? parseInt(currentDenom.bundle_count) || 0 : currentDenom.bundle_count)
-      const openCount = field === 'open_count' ? parsedValue : (typeof currentDenom.open_count === 'string' ? parseInt(currentDenom.open_count) || 0 : currentDenom.open_count)
-      const newCount = (bundleCount * 100) + openCount
-      updated[index].count = newCount
-      
       // Auto-calculate total: denomination × count (can be negative)
-      updated[index].total = updated[index].denomination * newCount
+      updated[index].total = updated[index].denomination * parsedValue
     }
     
     setDenominations(updated)
@@ -68,42 +58,25 @@ export function CurrencyCalculatorForm() {
     const validDenominations = []
     
     for (const denom of denominations) {
-      // Parse bundle and open counts
-      const bundleStr = denom.bundle_count.toString()
-      const openStr = denom.open_count.toString()
+      // Parse count
+      const countStr = denom.count.toString()
       
-      // Validate and parse bundle count
-      let bundleCount = 0
-      if (bundleStr && bundleStr !== '' && bundleStr !== '-') {
-        const bundleMatch = bundleStr.match(/^-?\d+$/)
-        if (bundleMatch) {
-          bundleCount = parseInt(bundleStr)
+      // Validate and parse count
+      let count = 0
+      if (countStr && countStr !== '' && countStr !== '-') {
+        const countMatch = countStr.match(/^-?\d+$/)
+        if (countMatch) {
+          count = parseInt(countStr)
         } else {
-          throw new Error(`Invalid bundle count for ₹${denom.denomination}: "${bundleStr}". Only numbers allowed.`)
+          throw new Error(`Invalid count for ₹${denom.denomination}: "${countStr}". Only numbers allowed.`)
         }
       }
-      
-      // Validate and parse open count
-      let openCount = 0
-      if (openStr && openStr !== '' && openStr !== '-') {
-        const openMatch = openStr.match(/^-?\d+$/)
-        if (openMatch) {
-          openCount = parseInt(openStr)
-        } else {
-          throw new Error(`Invalid open count for ₹${denom.denomination}: "${openStr}". Only numbers allowed.`)
-        }
-      }
-      
-      // Calculate total count
-      const totalCount = (bundleCount * 100) + openCount
       
       // Only include if there's a value
-      if (totalCount !== 0) {
+      if (count !== 0) {
         validDenominations.push({
           denomination: denom.denomination,
-          count: totalCount,
-          bundle_count: bundleCount,
-          open_count: openCount
+          count: count
         })
       }
     }
@@ -148,9 +121,7 @@ export function CurrencyCalculatorForm() {
       setDenominations(
         CURRENCY_DENOMINATIONS.map((currency: { value: number; label: string }) => ({
           denomination: currency.value,
-          bundle_count: '',
-          open_count: '',
-          count: 0,
+          count: '',
           total: 0
         }))
       )
@@ -188,53 +159,33 @@ export function CurrencyCalculatorForm() {
                       display: none; // Chrome/Safari
                     }
                   `}</style>
-                  <table className="w-full" style={{minWidth: '500px'}}>
+                  <table className="w-full">
                     <thead className="sticky top-0 bg-muted z-10">
                       <tr className="border-b border-border">
-                        <th className="sticky left-0 bg-muted z-20 text-left py-2 px-3 text-sm font-semibold text-muted-foreground w-32 border-r border-border">Denomination</th>
-                        <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Bundle</th>
-                        <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Open</th>
-                        <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-20">Count</th>
-                        <th className="text-center py-2 px-3 text-sm font-semibold text-gray-600 dark:text-gray-400 w-24">Total</th>
+                        <th className="sticky left-0 bg-muted z-20 text-left py-2 px-3 text-sm font-semibold text-muted-foreground w-24 border-r border-border">Denomination</th>
+                        <th className="text-center py-2 px-3 text-sm font-semibold text-muted-foreground w-20">Count</th>
+                        <th className="text-center py-2 px-3 text-sm font-semibold text-muted-foreground w-24">Total</th>
                       </tr>
                     </thead>
                       <tbody>
                         {denominations.map((denom, index) => (
                           <tr key={denom.denomination} className="border-b border-border hover:bg-muted transition-colors">
                             {/* Denomination */}
-                            <td className="sticky left-0 bg-muted z-10 py-1 px-3 w-32 border-r border-border">
+                            <td className="sticky left-0 bg-muted z-10 py-1 px-3 w-24 border-r border-border">
                               <div className="text-base font-semibold text-foreground">
                                 ₹{denom.denomination}
                               </div>
                             </td>
                             
-                            {/* Bundle Count */}
+                            {/* Count Input */}
                             <td className="py-1 px-3 text-center w-20">
                               <Input
                                 type="text"
-                                value={denom.bundle_count || ''}
-                                onChange={(e) => updateDenomination(index, 'bundle_count', e.target.value)}
+                                value={denom.count || ''}
+                                onChange={(e) => updateDenomination(index, e.target.value)}
                                 placeholder="0"
                                 className="text-base text-center h-8 w-full min-h-[32px] touch-manipulation"
                               />
-                            </td>
-                            
-                            {/* Open Count */}
-                            <td className="py-1 px-3 text-center w-20">
-                              <Input
-                                type="text"
-                                value={denom.open_count || ''}
-                                onChange={(e) => updateDenomination(index, 'open_count', e.target.value)}
-                                placeholder="0"
-                                className="text-base text-center h-8 w-full min-h-[32px] touch-manipulation"
-                              />
-                            </td>
-                            
-                            {/* Count Display */}
-                            <td className="py-1 px-3 text-center w-20">
-                              <div className={`text-base font-medium ${denom.count >= 0 ? 'text-foreground' : 'text-destructive'}`}>
-                                {denom.count}
-                              </div>
                             </td>
                             
                             {/* Total */}

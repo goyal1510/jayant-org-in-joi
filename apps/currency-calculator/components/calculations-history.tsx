@@ -438,12 +438,10 @@ export function CalculationsHistory() {
                             display: none; // Chrome/Safari
                           }
                         `}</style>
-                        <table className="w-full" style={{minWidth: '500px'}}>
+                        <table className="w-full">
                           <thead className="sticky top-0 bg-muted z-10">
                             <tr className="border-b border-border">
-                              <th className="sticky left-0 bg-muted z-20 text-left py-2 px-3 text-sm font-semibold text-muted-foreground w-32 border-r border-border">Denomination</th>
-                              <th className="text-center py-2 px-3 text-sm font-semibold text-muted-foreground w-20">Bundle</th>
-                              <th className="text-center py-2 px-3 text-sm font-semibold text-muted-foreground w-20">Open</th>
+                              <th className="sticky left-0 bg-muted z-20 text-left py-2 px-3 text-sm font-semibold text-muted-foreground w-24 border-r border-border">Denomination</th>
                               <th className="text-center py-2 px-3 text-sm font-semibold text-muted-foreground w-20">Count</th>
                               <th className="text-center py-2 px-3 text-sm font-semibold text-muted-foreground w-24">Total</th>
                             </tr>
@@ -453,19 +451,9 @@ export function CalculationsHistory() {
                                 .sort((a: any, b: any) => b.denomination - a.denomination)
                                 .map((denom: any) => (
                                   <tr key={denom.id} className="border-b border-border hover:bg-muted transition-colors">
-                                    <td className="sticky left-0 bg-muted z-10 py-2 px-3 w-32 border-r border-border">
+                                    <td className="sticky left-0 bg-muted z-10 py-2 px-3 w-24 border-r border-border">
                                       <div className="text-base font-semibold text-foreground">
                                         ₹{denom.denomination}
-                                      </div>
-                                    </td>
-                                    <td className="py-2 px-3 text-center w-20">
-                                      <div className="text-base font-medium text-foreground">
-                                        {denom.bundle_count || 0}
-                                      </div>
-                                    </td>
-                                    <td className="py-2 px-3 text-center w-20">
-                                      <div className="text-base font-medium text-foreground">
-                                        {denom.open_count || 0}
                                       </div>
                                     </td>
                                     <td className="py-2 px-3 text-center w-20">
