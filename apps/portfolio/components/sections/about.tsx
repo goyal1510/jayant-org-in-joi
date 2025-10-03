@@ -63,7 +63,7 @@ export function About() {
 
         <div className="space-y-12">
           {/* Personal Info and Career Objective */}
-          <div className="grid lg:grid-cols-2 gap-12 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
             {/* Left Column - Personal Info */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -72,13 +72,13 @@ export function About() {
               viewport={{ once: true }}
               className="h-full"
             >
-              <Card className="p-6 h-full">
-                <CardContent className="space-y-6 h-full flex flex-col">
+              <Card className="p-4 sm:p-6 h-full">
+                <CardContent className="space-y-4 sm:space-y-6 h-full flex flex-col">
                   <div>
                     <h3 className="text-2xl font-semibold text-foreground mb-4">
                       Personal Information
                     </h3>
-                    <div className="grid gap-4">
+                    <div className="grid gap-3 sm:gap-4">
                       {personalInfo.map((info, index) => (
                         <motion.div
                           key={info.label}
@@ -86,14 +86,14 @@ export function About() {
                           whileInView={{ opacity: 1, x: 0 }}
                           transition={{ duration: 0.5, delay: index * 0.1 }}
                           viewport={{ once: true }}
-                          className="flex items-center space-x-3"
+                          className="flex items-start sm:items-center space-x-3"
                         >
-                          <info.icon className="h-5 w-5 text-primary" />
-                          <div className="flex items-center gap-2">
-                            <Badge variant="outline" className="text-xs">
+                          <info.icon className="h-5 w-5 text-primary mt-0.5 sm:mt-0 flex-shrink-0" />
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 min-w-0">
+                            <Badge variant="outline" className="text-xs w-fit">
                               {info.label}
                             </Badge>
-                            <span className="text-foreground font-medium">{info.value}</span>
+                            <span className="text-foreground font-medium text-sm sm:text-base break-words">{info.value}</span>
                           </div>
                         </motion.div>
                       ))}
@@ -104,7 +104,7 @@ export function About() {
                     <h4 className="text-lg font-semibold text-foreground mb-3">
                       Connect with me
                     </h4>
-                    <div className="flex space-x-4">
+                    <div className="flex flex-wrap gap-3 sm:gap-4">
                       {socialLinks.map((social, index) => (
                         <motion.a
                           key={social.label}
@@ -114,9 +114,9 @@ export function About() {
                           whileInView={{ opacity: 1, scale: 1 }}
                           transition={{ duration: 0.5, delay: index * 0.1 }}
                           viewport={{ once: true }}
-                          className="p-2 rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
+                          className="p-2 sm:p-3 rounded-lg bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-colors duration-200"
                         >
-                          <social.icon className="h-5 w-5" />
+                          <social.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                         </motion.a>
                       ))}
                     </div>
@@ -133,8 +133,8 @@ export function About() {
               viewport={{ once: true }}
               className="h-full"
             >
-              <Card className="p-6 h-full">
-                <CardContent className="space-y-6 h-full flex flex-col">
+              <Card className="p-4 sm:p-6 h-full">
+                <CardContent className="space-y-4 sm:space-y-6 h-full flex flex-col">
                   <div>
                     <h3 className="text-2xl font-semibold text-foreground mb-4">
                       Career Objective
