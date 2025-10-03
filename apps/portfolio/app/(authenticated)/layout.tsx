@@ -17,7 +17,7 @@ export default function AuthenticatedLayout({
         <div className="sticky top-0 z-10 bg-background border-b flex items-center justify-between p-4">
           <div className="flex items-center gap-2">
             <SidebarTrigger />
-            <h1 className="text-lg font-semibold">Jayant</h1>
+            <h1 className="text-lg font-semibold">Portfolio</h1>
           </div>
           <ThemeToggle />
         </div>

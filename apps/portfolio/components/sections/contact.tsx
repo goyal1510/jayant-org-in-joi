@@ -142,9 +142,6 @@ export function Contact() {
                     <info.icon className="h-5 w-5" />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <Badge variant="outline" className="w-fit">
-                      {info.title}
-                    </Badge>
                     <p className="text-sm text-muted-foreground">{info.value}</p>
                   </div>
                 </motion.a>

@@ -90,9 +90,6 @@ export function About() {
                         >
                           <info.icon className="h-5 w-5 text-primary mt-0.5 sm:mt-0 flex-shrink-0" />
                           <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 min-w-0">
-                            <Badge variant="outline" className="text-xs w-fit">
-                              {info.label}
-                            </Badge>
                             <span className="text-foreground font-medium text-sm sm:text-base break-words">{info.value}</span>
                           </div>
                         </motion.div>
