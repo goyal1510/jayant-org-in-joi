@@ -5,7 +5,7 @@ import { Button } from "@workspace/ui/components/button"
 import { Card, CardContent } from "@workspace/ui/components/card"
 import { Input } from "@workspace/ui/components/input"
 import { Label } from "@workspace/ui/components/label"
-import { signInWithEmail } from "@/lib/auth"
+import { signInWithEmail, signInAsGuest } from "@/lib/auth"
 import { useState } from "react"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
@@ -15,6 +15,7 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"div">) {
   const [isLoading, setIsLoading] = useState(false)
+  const [isGuestLoading, setIsGuestLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const router = useRouter()
@@ -36,6 +37,24 @@ export function LoginForm({
       })
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const handleGuestSignIn = async () => {
+    try {
+      setIsGuestLoading(true)
+      await signInAsGuest()
+      toast.success("Welcome as Guest!", {
+        description: "You can now explore the portfolio."
+      })
+      router.push('/home')
+    } catch (error: any) {
+      console.error('Guest sign in error:', error)
+      toast.error("Guest login failed", {
+        description: error.message || "Unable to sign in as guest. Please try again."
+      })
+    } finally {
+      setIsGuestLoading(false)
     }
   }
 
@@ -73,9 +92,22 @@ export function LoginForm({
                   required 
                 />
               </div>
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Signing in..." : "Login"}
-              </Button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <Button type="submit" className="w-full" disabled={isLoading || isGuestLoading}>
+                  {isLoading ? "Signing in..." : "Login"}
+                </Button>
+                
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  className="w-full" 
+                  onClick={handleGuestSignIn}
+                  disabled={isLoading || isGuestLoading}
+                >
+                  {isGuestLoading ? "Signing in as Guest..." : "Continue as Guest"}
+                </Button>
+              </div>
+              
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
                 <a href="/signup" className="underline underline-offset-4">

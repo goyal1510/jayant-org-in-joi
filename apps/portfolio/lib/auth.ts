@@ -76,3 +76,21 @@ export async function getCurrentUserSafe() {
     return null
   }
 }
+
+// Guest Login - Client-side function that calls the API
+export async function signInAsGuest() {
+  const response = await fetch('/api/auth/guest', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error.error || 'Guest login failed')
+  }
+
+  const { data } = await response.json()
+  return data
+}
